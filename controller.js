@@ -214,6 +214,8 @@ async function insertQ(){
      return "";
    }
  
+   var intervalcountdown = null
+
   async function  timeOut(Q) {
       var count = 180;
     //   alert(getCookie('Time'))
@@ -222,51 +224,48 @@ async function insertQ(){
           count = getCookie('Time');
       }
     
-      var x=   setInterval(async function()
-     { 
-         count--;
-         console.log(count);
-         document.cookie = `Time=${count}`;
-         console.log("cookie = "+getCookie('Time'));
-         document.querySelector('.navbar').innerHTML = `<h2>คุณมีเวลาเหลือ ${getCookie('Time')} วินาที</h2>`;
+      intervalcountdown = setInterval(async function () {
+        count--;
+        console.log(count);
+        document.cookie = `Time=${count}`;
+        console.log("cookie = " + getCookie("Time"));
+        document.querySelector(
+          ".navbar"
+        ).innerHTML = `<h2>คุณมีเวลาเหลือ ${getCookie("Time")} วินาที</h2>`;
         // document.getElementById('time').innerHTML = '<p> เหลือเวลา : '+ count+'</p>';
-         if(count == 0)
-         {
-             
-             console.log(count);
-             clearInterval(x);
-             var mydate = new Date();
-             mydate.setTime(mydate.getTime() - 1);
-             document.cookie = "Q=null; expires=" + mydate.toGMTString(); 
-             document.cookie = "Time=null; expires=" + mydate.toGMTString(); 
-             firebase.database().ref("Data/Q/"+Q).remove();
+        if (count == 0) {
+          console.log(count);
+          clearInterval(intervalcountdown);
+          var mydate = new Date();
+          mydate.setTime(mydate.getTime() - 1);
+          document.cookie = "Q=null; expires=" + mydate.toGMTString();
+          document.cookie = "Time=null; expires=" + mydate.toGMTString();
+          firebase
+            .database()
+            .ref("Data/Q/" + Q)
+            .remove();
 
+          setSpeed2Firebase(0);
+          firebase.database().ref("Data/Movement").set({
+            Status: 11,
+          });
 
-             setSpeed2Firebase(0);
-            firebase.database().ref("Data/Movement").set({
-                "Status" : 11,
-            });
+          for (let indexz = 0; indexz < 24; indexz++) {
+            firebase
+              .database()
+              .ref("Data/Color/Room" + (indexz + 1))
+              .set({
+                red: 255,
+                green: 255,
+                blue: 255,
+              });
+          }
 
-            for (let indexz = 0; indexz < 24; indexz++) {
-                firebase.database().ref("Data/Color/Room"+(indexz+1)).set({
-                    "red" : 255,
-                    "green" : 255,
-                    "blue" : 255
-                });           
-            }
-
-
-            var z = setTimeout(function(){
-                location.reload();
-            },1000);
-            
-             
-
-             
-             
-
-            }
-     }, 1000);
+          var z = setTimeout(function () {
+            location.reload();
+          }, 1000);
+        }
+      }, 1000);
      
    }
 
@@ -307,12 +306,48 @@ const initController = ()=>{
 
   //resetbtn
   let resetbtn = document.querySelector(".resetbtn");
-  console.log("into reset");
+  
+  
       resetbtn.onclick = () => {
-        firebase
-          .database()
-          .ref("Data/Test")
-          .remove();
+        console.log("into reset");
+        
+        var r = confirm("Are You sure to finish?");
+        if (r == true) {
+                  firebase
+                    .database()
+                    .ref("Data/Q/")
+                    .limitToFirst(1)
+                    .once("value", function (snapshot) {
+                      console.log("testFIREBASE");
+                      console.log(snapshot.val());
+                      if (snapshot.val() === null) {
+                        console.log("isNUll");
+                      } else {
+                        console.log("notNUll");
+                        console.log("Hello" + Object.keys(snapshot.val()));
+                        firebase
+                          .database()
+                          .ref("Data/Q/" + Object.keys(snapshot.val()))
+                          .remove();
+                        console.log("DELETE Q");
+
+                        clearInterval(intervalcountdown);
+                        var mydate = new Date();
+                        mydate.setTime(mydate.getTime() - 1);
+                        document.cookie =
+                          "Q=null; expires=" + mydate.toGMTString();
+                        document.cookie =
+                          "Time=null; expires=" + mydate.toGMTString();
+
+                        var z = setTimeout(function () {
+                          location.reload();
+                        }, 1000);
+                      }
+                    });
+        } else {
+          
+        }
+
       };
 
   //color picker
