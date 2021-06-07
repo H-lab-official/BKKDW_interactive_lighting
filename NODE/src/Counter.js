@@ -17,7 +17,7 @@ class Counter{
                     // console.log("Hello"+Object.keys(snapshot.val()))
                     firebase.database().ref("Data/Q/"+Object.keys(snapshot.val())).remove(); 
                     console.log("DELETE Q");
-                }, 120000);
+                }, 180000);
                 
             }
         });
