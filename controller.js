@@ -282,6 +282,13 @@ async function insertQ(){
 
 //----------------Start initController function----------------
 const initController = ()=>{
+  //initvalue
+  setLight_HS_2Firebase("L", "hue", 0);
+  setLight_HS_2Firebase("L", "saturation", 0);
+  setLight_HS_2Firebase("R", "hue", 0);
+  setLight_HS_2Firebase("R", "saturation", 0);
+  setLight_isON_2Firebase("L", 0);
+  setLight_isON_2Firebase("R", 0);
   //----------------initial variable----------------
   // Create new link Element
   var link = document.createElement("link");
@@ -375,6 +382,7 @@ const initController = ()=>{
     console.log("colorPickerL_hue End = "+color.$.h);
     let norm_color = color.$.h/360;
     console.log("colorPickerL_hue NORM = " + norm_color);
+    setLight_HS_2Firebase('L','hue',norm_color);
 });
 
   //colorPickerL_sat;
@@ -386,6 +394,7 @@ const initController = ()=>{
     console.log("colorPickerL_sat End = " + color.$.s);
     let norm_color = color.$.s / 100;
     console.log("colorPickerL_sat NORM = " + norm_color);
+    setLight_HS_2Firebase("L", "saturation", norm_color);
 });
 
   //colorPickerR_hue;
@@ -397,6 +406,7 @@ const initController = ()=>{
     console.log("colorPickerR_hue End = " + color.$.h);
     let norm_color = color.$.h / 360;
     console.log("colorPickerR_hue NORM = " + norm_color);
+    setLight_HS_2Firebase('R','hue',norm_color);
 });
 
   //colorPickerR_sat;
@@ -408,6 +418,7 @@ const initController = ()=>{
     console.log("colorPickerR_sat End = " + color.$.s);
     let norm_color = color.$.s / 100;
     console.log("colorPickerR_sat NORM = " + norm_color);
+    setLight_HS_2Firebase("R", "saturation", norm_color);
 });
 
 
@@ -420,9 +431,11 @@ toggle_light_L.onchange = () => {
   if (isChecked) {
     let norm_toggle = 1;
     console.log("toggle_L " + norm_toggle);
+    setLight_isON_2Firebase('L',norm_toggle);
   } else {
     let norm_toggle = 0;
     console.log("toggle_L " + norm_toggle);
+    setLight_isON_2Firebase("L", norm_toggle);
   }
 };
 
@@ -431,9 +444,11 @@ toggle_light_R.onchange = () => {
   if (isChecked){
     let norm_toggle = 1;
     console.log("toggle_R " + norm_toggle);
+    setLight_isON_2Firebase('R',norm_toggle);
   }else{
     let norm_toggle = 0;
     console.log("toggle_R " + norm_toggle);
+    setLight_isON_2Firebase("R", norm_toggle);
   }
 };
     
@@ -486,6 +501,26 @@ const setSpeed2Firebase=(speed_state)=>{
              "Status" : speed_state,
     });
 }
+
+
+
+//-------------NEO Firebase function-----------
+const setLight_HS_2Firebase = (
+  side,
+  type,
+  norm_val,
+) => {
+  firebase.database().ref(`Data/BKKDSW/Light_Color_${side}_${type}`).set({
+    val: norm_val,
+  });
+};
+
+const setLight_isON_2Firebase = (side, norm_val) => {
+  firebase.database().ref(`Data/BKKDSW/Light_isON_${side}`).set({
+    Status: norm_val,
+  });
+};
+
 
 //-------------footer btn section-------------
 

@@ -20,7 +20,9 @@ class Room{
     }
 
     sendDataToResulume(osc, numberroom, RGB, color){
-
+        console.log("numberroom = " + numberroom);
+        console.log("color = " + color);
+        console.log("RGB = " + RGB);
         osc.send({
             address: `/composition/layers/${numberroom}/clips/8/video/source/solidcolor/color/${color}`,
             args: [

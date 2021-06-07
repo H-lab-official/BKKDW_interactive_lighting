@@ -73,6 +73,7 @@ class Controller{
 
     sendDataSpeedToResulume(osc, value, path)
     {
+        console.log("spedd val = "+value);
         osc.send({
             address: `${path}`,
             args: [

@@ -32,49 +32,9 @@ class Index{
         this.udpPort.open();
         for(let i=1; i<=24; i++){
             new room().getDataRoom(this.udpPort, i);
-        }
-        
+        }  
         new controller().getDataMovement(this.udpPort);
         new controller().getDataSpeed(this.udpPort);
-        // new room().getDataRoom(this.udpPort, 2);
-        // new room().getDataRoom(this.udpPort, 3);
-        // new room().getDataRoom(this.udpPort, 4);
-        // new room().getDataRoom(this.udpPort, 5);
-        // new room().getDataRoom(this.udpPort, 6);
-        // new room().getDataRoom(this.udpPort, 7);
-        // new room().getDataRoom(this.udpPort, 8);
-        // new room().getDataRoom(this.udpPort, 9);
-        // new room().getDataRoom(this.udpPort, 10);
-        // new room().getDataRoom(this.udpPort, 11);
-        // new room().getDataRoom(this.udpPort, 12);
-        // new room().getDataRoom(this.udpPort, 13);
-        // new room().getDataRoom(this.udpPort, 14);
-        // new room().getDataRoom(this.udpPort, 15);
-        // new room().getDataRoom(this.udpPort, 16);
-        // new room().getDataRoom(this.udpPort, 17);
-        // new room().getDataRoom(this.udpPort, 18);
-        // new room().getDataRoom(this.udpPort, 19);
-        // new room().getDataRoom(this.udpPort, 20);
-        // new room().getDataRoom(this.udpPort, 21);
-        // new room().getDataRoom(this.udpPort, 22);
-        // new room().getDataRoom(this.udpPort, 23);
-        // new room().getDataRoom(this.udpPort, 24);
-        // for (let index = 1; index <=1; index++) {
-        //     this.getData(this.udpPort,index);
-        // }
-        
-  
-            // this.getData(this.udpPort,1);
-            //  this.getData(this.udpPort,2);
-
-        
-
-        // this.getData(this.udpPort,1);
-
-        // this.getData(this.udpPort,1);
-        // this.getData(this.udpPort,1);
-        // this.getData(this.udpPort,1);
-
         new counter().removeQ();
     }
 
