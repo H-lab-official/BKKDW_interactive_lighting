@@ -1355,3 +1355,7 @@ input:checked + .slider:before {
 .labelwrap-hr{
     margin-left: 10px;
 }
+
+.pickerwraphide{
+    visibility: hidden;
+}
