@@ -282,97 +282,166 @@ async function insertQ(){
 
 //----------------Start initController function----------------
 const initController = ()=>{
-    //----------------initial variable----------------
-    // Create new link Element 
-    var link = document.createElement('link');  
+  //----------------initial variable----------------
+  // Create new link Element
+  var link = document.createElement("link");
 
-    // set the attributes for link element 
-    link.rel = 'stylesheet';  
+  // set the attributes for link element
+  link.rel = "stylesheet";
 
-    link.type = 'text/css'; 
+  link.type = "text/css";
 
-    link.href = 'controller.css';  
+  link.href = "controller.css";
 
-    // Get HTML head element to append  
-    // link element to it  
-    document.getElementsByTagName('HEAD')[0].appendChild(link);  
+  // Get HTML head element to append
+  // link element to it
+  document.getElementsByTagName("HEAD")[0].appendChild(link);
 
-
-    let colorPickerL_hue = new iro.ColorPicker("#pickerL_hue", {
-      layoutDirection: "horizontal",
-      width: 240,
-      margin: 50,
-      layout: [
-        {
-          component: iro.ui.Slider,
-          options: {
-            // can also be 'saturation', 'value', 'red', 'green', 'blue', 'alpha' or 'kelvin'
-            sliderType: "hue",
-          },
+  //color picker
+  let colorPickerL_hue = new iro.ColorPicker("#pickerL_hue", {
+    layoutDirection: "horizontal",
+    width: 240,
+    margin: 50,
+    layout: [
+      {
+        component: iro.ui.Slider,
+        options: {
+          // can also be 'saturation', 'value', 'red', 'green', 'blue', 'alpha' or 'kelvin'
+          sliderType: "hue",
         },
-      ],
-    });
+      },
+    ],
+  });
 
-        let colorPickerL_sat = new iro.ColorPicker("#pickerL_sat", {
-          layoutDirection: "horizontal",
-          width: 240,
-          margin: 50,
-          layout: [
-            {
-              component: iro.ui.Slider,
-              options: {
-                // can also be 'saturation', 'value', 'red', 'green', 'blue', 'alpha' or 'kelvin'
-                sliderType: "saturation",
-              },
-            },
-          ],
-        });
+  let colorPickerL_sat = new iro.ColorPicker("#pickerL_sat", {
+    layoutDirection: "horizontal",
+    width: 240,
+    margin: 50,
+    layout: [
+      {
+        component: iro.ui.Slider,
+        options: {
+          // can also be 'saturation', 'value', 'red', 'green', 'blue', 'alpha' or 'kelvin'
+          sliderType: "saturation",
+        },
+      },
+    ],
+  });
 
-            let colorPickerR_hue = new iro.ColorPicker("#pickerR_hue", {
-              layoutDirection: "horizontal",
-              width: 240,
-              margin: 50,
-              layout: [
-                {
-                  component: iro.ui.Slider,
-                  options: {
-                    // can also be 'saturation', 'value', 'red', 'green', 'blue', 'alpha' or 'kelvin'
-                    sliderType: "hue",
-                  },
-                },
-              ],
-            });
+  let colorPickerR_hue = new iro.ColorPicker("#pickerR_hue", {
+    layoutDirection: "horizontal",
+    width: 240,
+    margin: 50,
+    layout: [
+      {
+        component: iro.ui.Slider,
+        options: {
+          // can also be 'saturation', 'value', 'red', 'green', 'blue', 'alpha' or 'kelvin'
+          sliderType: "hue",
+        },
+      },
+    ],
+  });
 
-            let colorPickerR_sat = new iro.ColorPicker("#pickerR_sat", {
-              layoutDirection: "horizontal",
-              width: 240,
-              margin: 50,
-              layout: [
-                {
-                  component: iro.ui.Slider,
-                  options: {
-                    // can also be 'saturation', 'value', 'red', 'green', 'blue', 'alpha' or 'kelvin'
-                    sliderType: "saturation",
-                  },
-                },
-              ],
-            });
+  let colorPickerR_sat = new iro.ColorPicker("#pickerR_sat", {
+    layoutDirection: "horizontal",
+    width: 240,
+    margin: 50,
+    layout: [
+      {
+        component: iro.ui.Slider,
+        options: {
+          // can also be 'saturation', 'value', 'red', 'green', 'blue', 'alpha' or 'kelvin'
+          sliderType: "saturation",
+        },
+      },
+    ],
+  });
+
+  //----------------function for set css in each element----------------
+  const css = (element, style) => {
+    for (const property in style) element.style[property] = style[property];
+  };
+
+
+  //----------------function about color picker----------------
+
+  //colorPickerL_hue;
+  colorPickerL_hue.on("color:change", function (color) {
+    // console.log("colorPickerL_hue; = "+color);
+  });
+
+  colorPickerL_hue.on("input:end", function (color) {
+    console.log("colorPickerL_hue End = "+color.$.h);
+    let norm_color = color.$.h/360;
+    console.log("colorPickerL_hue NORM = " + norm_color);
+});
+
+  //colorPickerL_sat;
+  colorPickerL_sat.on("color:change", function (color) {
+    // console.log("colorPickerL_sat; = "+color);
+  });
+
+  colorPickerL_sat.on("input:end", function (color) {
+    console.log("colorPickerL_sat End = " + color.$.s);
+    let norm_color = color.$.s / 100;
+    console.log("colorPickerL_sat NORM = " + norm_color);
+});
+
+  //colorPickerR_hue;
+  colorPickerR_hue.on("color:change", function (color) {
+    // console.log("colorPickerR_hue; = "+color);
+  });
+
+  colorPickerR_hue.on("input:end", function (color) {
+    console.log("colorPickerR_hue End = " + color.$.h);
+    let norm_color = color.$.h / 360;
+    console.log("colorPickerR_hue NORM = " + norm_color);
+});
+
+  //colorPickerR_sat;
+  colorPickerR_sat.on("color:change", function (color) {
+    // console.log("colorPickerR_sat; = "+color);
+  });
+
+  colorPickerR_sat.on("input:end", function (color) {
+    console.log("colorPickerR_sat End = " + color.$.s);
+    let norm_color = color.$.s / 100;
+    console.log("colorPickerR_sat NORM = " + norm_color);
+});
+
+
+//toggle
+let toggle_light_L = document.querySelector("#toggle_light_L");
+let toggle_light_R = document.querySelector("#toggle_light_R");
+
+toggle_light_L.onchange = () => {
+  var isChecked = document.getElementById("toggle_light_L").checked;
+  if (isChecked) {
+    let norm_toggle = 1;
+    console.log("toggle_L " + norm_toggle);
+  } else {
+    let norm_toggle = 0;
+    console.log("toggle_L " + norm_toggle);
+  }
+};
+
+toggle_light_R.onchange = () => {
+  var isChecked = document.getElementById("toggle_light_R").checked;
+  if (isChecked){
+    let norm_toggle = 1;
+    console.log("toggle_R " + norm_toggle);
+  }else{
+    let norm_toggle = 0;
+    console.log("toggle_R " + norm_toggle);
+  }
+};
     
 
 
 
 
-    //----------------function for set css in each element----------------
-    const css=(element, style)=> {
-        for (const property in style)
-            element.style[property] = style[property];
-    }
-
-
-
-    
 }
-
 //----------------END initController function----------------
 
 

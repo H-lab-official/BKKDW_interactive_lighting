@@ -1342,3 +1342,16 @@ input:checked + .slider:before {
 .pickerbkkdswr{
     margin-left: 10px;
 }
+
+.labelwrap{
+    display: flex;
+    flex-direction: row;
+}
+
+.labelwrap-hl{
+    margin-right: 10px;
+}
+
+.labelwrap-hr{
+    margin-left: 10px;
+}
