@@ -18,8 +18,8 @@ class Light_Both {
   }
 
   sendDataToResulume(osc, value) {
-      if (value==1){
-          console.log("light both val = "+value);
+      if (value == 1) {
+        console.log("light both val = " + value);
         osc.send(
           {
             address: `/composition/columns/1/connect`,
@@ -33,9 +33,42 @@ class Light_Both {
           "localhost",
           8000
         );
+      } else if (value == 2) {
+        //Auto1
+        console.log("light both val = " + value);
+        osc.send(
+          {
+            address: `/composition/columns/3/connect`,
+            args: [
+              {
+                type: "i",
+                value: 1,
+              },
+            ],
+          },
+          "localhost",
+          8000
+        );
+      } else if (value == 3) {
+        //Auto2
+        console.log("light both val = " + value);
+        osc.send(
+          {
+            address: `/composition/columns/4/connect`,
+            args: [
+              {
+                type: "i",
+                value: 1,
+              },
+            ],
+          },
+          "localhost",
+          8000
+        );
       }else{
-          console.log("no both = " + value);
+        console.log("Bla Bla");
       }
+
         
   }
 }

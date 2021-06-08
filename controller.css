@@ -1357,5 +1357,31 @@ input:checked + .slider:before {
 }
 
 .pickerwraphide{
-    visibility: hidden;
+    /* visibility: hidden; */
+}
+
+.btnwrap{
+    /* display: flex;
+    flex-direction: column;
+    justify-content: start; */
+}
+
+.autobtnwrap{
+    margin-bottom: 45px;
+    text-align: center;
+}
+
+.autobtn{
+    text-align: center;
+    color: black;
+    background-color: white;
+    padding: 7px 12px; 
+    border-radius: 42px;
+    border-width: 0px; 
+}
+
+.autobtn:focus{
+    outline: none;
+    color: black;
+    background-color: rgb(228, 228, 228);
 }

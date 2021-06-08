@@ -282,10 +282,10 @@ async function insertQ(){
 //----------------Start initController function----------------
 const initController = ()=>{
   //initvalue
-  setLight_HS_2Firebase("L", "hue", 0);
-  setLight_HS_2Firebase("L", "saturation", 0);
-  setLight_HS_2Firebase("R", "hue", 0);
-  setLight_HS_2Firebase("R", "saturation", 0);
+  setLight_HS_2Firebase("L", "hue", 1);
+  setLight_HS_2Firebase("L", "saturation", 1);
+  setLight_HS_2Firebase("R", "hue", 1);
+  setLight_HS_2Firebase("R", "saturation", 1);
   setLight_isON_2Firebase("L", 0);
   setLight_isON_2Firebase("R", 0);
   setLight_BOTH_2Firebase(1);
@@ -306,11 +306,8 @@ const initController = ()=>{
 
   //resetbtn
   let resetbtn = document.querySelector(".resetbtn");
-  
-  
       resetbtn.onclick = () => {
         console.log("into reset");
-        
         var r = confirm("Are You sure to finish?");
         if (r == true) {
                   firebase
@@ -350,6 +347,8 @@ const initController = ()=>{
 
       };
 
+     
+
   //color picker
   let colorPickerL_hue = new iro.ColorPicker("#pickerL_hue", {
     layoutDirection: "horizontal",
@@ -366,10 +365,13 @@ const initController = ()=>{
     ],
   });
 
+  colorPickerL_hue.color.hsv = { h: 360};
+
   let colorPickerL_sat = new iro.ColorPicker("#pickerL_sat", {
     layoutDirection: "horizontal",
     width: 240,
     margin: 50,
+    // color: 100,
     layout: [
       {
         component: iro.ui.Slider,
@@ -381,35 +383,41 @@ const initController = ()=>{
     ],
   });
 
-  let colorPickerR_hue = new iro.ColorPicker("#pickerR_hue", {
-    layoutDirection: "horizontal",
-    width: 240,
-    margin: 50,
-    layout: [
-      {
-        component: iro.ui.Slider,
-        options: {
-          // can also be 'saturation', 'value', 'red', 'green', 'blue', 'alpha' or 'kelvin'
-          sliderType: "hue",
-        },
-      },
-    ],
-  });
+  colorPickerL_sat.color.hsv = { s: 100 };
 
-  let colorPickerR_sat = new iro.ColorPicker("#pickerR_sat", {
-    layoutDirection: "horizontal",
-    width: 240,
-    margin: 50,
-    layout: [
-      {
-        component: iro.ui.Slider,
-        options: {
-          // can also be 'saturation', 'value', 'red', 'green', 'blue', 'alpha' or 'kelvin'
-          sliderType: "saturation",
-        },
-      },
-    ],
-  });
+//   let colorPickerR_hue = new iro.ColorPicker("#pickerR_hue", {
+//     layoutDirection: "horizontal",
+//     width: 240,
+//     margin: 50,
+//     // color: 360,
+//     layout: [
+//       {
+//         component: iro.ui.Slider,
+//         options: {
+//           // can also be 'saturation', 'value', 'red', 'green', 'blue', 'alpha' or 'kelvin'
+//           sliderType: "hue",
+//         },
+//       },
+//     ],
+//   });
+// colorPickerR_hue.color.hsv = { h: 360 };
+
+//   let colorPickerR_sat = new iro.ColorPicker("#pickerR_sat", {
+//     layoutDirection: "horizontal",
+//     width: 240,
+//     margin: 50,
+//     // color: 100,
+//     layout: [
+//       {
+//         component: iro.ui.Slider,
+//         options: {
+//           // can also be 'saturation', 'value', 'red', 'green', 'blue', 'alpha' or 'kelvin'
+//           sliderType: "saturation",
+//         },
+//       },
+//     ],
+//   });
+// colorPickerR_sat.color.hsv = { s: 100 };
 
   //----------------function for set css in each element----------------
   const css = (element, style) => {
@@ -445,31 +453,31 @@ const initController = ()=>{
     setLight_BOTH_2Firebase(0);
 });
 
-  //colorPickerR_hue;
-  colorPickerR_hue.on("color:change", function (color) {
-    // console.log("colorPickerR_hue; = "+color);
-  });
+//   //colorPickerR_hue;
+//   colorPickerR_hue.on("color:change", function (color) {
+//     // console.log("colorPickerR_hue; = "+color);
+//   });
 
-  colorPickerR_hue.on("input:end", function (color) {
-    console.log("colorPickerR_hue End = " + color.$.h);
-    let norm_color = color.$.h / 360;
-    console.log("colorPickerR_hue NORM = " + norm_color);
-    setLight_HS_2Firebase('R','hue',norm_color);
-    setLight_BOTH_2Firebase(0);
-});
+//   colorPickerR_hue.on("input:end", function (color) {
+//     console.log("colorPickerR_hue End = " + color.$.h);
+//     let norm_color = color.$.h / 360;
+//     console.log("colorPickerR_hue NORM = " + norm_color);
+//     setLight_HS_2Firebase('R','hue',norm_color);
+//     setLight_BOTH_2Firebase(0);
+// });
 
-  //colorPickerR_sat;
-  colorPickerR_sat.on("color:change", function (color) {
-    // console.log("colorPickerR_sat; = "+color);
-  });
+//   //colorPickerR_sat;
+//   colorPickerR_sat.on("color:change", function (color) {
+//     // console.log("colorPickerR_sat; = "+color);
+//   });
 
-  colorPickerR_sat.on("input:end", function (color) {
-    console.log("colorPickerR_sat End = " + color.$.s);
-    let norm_color = color.$.s / 100;
-    console.log("colorPickerR_sat NORM = " + norm_color);
-    setLight_HS_2Firebase("R", "saturation", norm_color);
-    setLight_BOTH_2Firebase(0);
-});
+//   colorPickerR_sat.on("input:end", function (color) {
+//     console.log("colorPickerR_sat End = " + color.$.s);
+//     let norm_color = color.$.s / 100;
+//     console.log("colorPickerR_sat NORM = " + norm_color);
+//     setLight_HS_2Firebase("R", "saturation", norm_color);
+//     setLight_BOTH_2Firebase(0);
+// });
 
 
 //toggle
@@ -507,7 +515,21 @@ toggle_light_R.onchange = () => {
 };
     
 
+ let autobtn1 = document.querySelector("#autobtn1");
+ let autobtn2 = document.querySelector("#autobtn2");
+ let zerobtn = document.querySelector("#zerobtn");
 
+ autobtn1.onclick = () => {
+   setLight_BOTH_2Firebase(2);
+ };
+
+ autobtn2.onclick = () => {
+   setLight_BOTH_2Firebase(3);
+ };
+
+ zerobtn.onclick = () => {
+   setLight_BOTH_2Firebase(1);
+ };
 
 
 }

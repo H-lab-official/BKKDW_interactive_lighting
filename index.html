@@ -11,7 +11,9 @@
         gtag('config', 'G-23JYY8E8XB');
         </script>
     <!-- Bootstrap Core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+            integrity="undefined" crossorigin="anonymous">
 
     <!-- Custom Fonts -->
     <!-- <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"> -->
@@ -87,7 +89,7 @@
                                 <img src="img/light_L.png">
                             </div>
                             <label class="switch">
-                                <input id="toggle_light_L" type="checkbox">
+                                <input id="toggle_light_R" type="checkbox">
                                 <span class="slider"></span>
                             </label>
                             <div class="labelwrap">
@@ -95,12 +97,15 @@
                                <h3 class="labelwrap-hr">on</h3>
                             </div>
                             <br/>
-                            <div class="pickerwrap">
-                                <div class="pickerbkkdswl">
-                                    <div id="pickerL_hue"></div>
+                            <div class="btnwrap pickerwraphide">
+                                <div class="">
+                                    <p class="autobtnwrap"><button id="autobtn1" class="autobtn">Auto1</button></p>
                                 </div>
-                                <div class="pickerbkkdswr">
-                                    <div id="pickerL_sat"></div>
+                                <div class="">
+                                    <p class="autobtnwrap"><button id="autobtn2" class="autobtn">Auto2</button></p>
+                                </div>
+                                <div class="">
+                                    <p class="autobtnwrap"><button id="zerobtn" class="autobtn">Reset</button></p>
                                 </div>
                             </div>
                         </div>
@@ -109,7 +114,7 @@
                                 <img src="img/light_R.png">
                             </div>
                             <label class="switch">
-                                <input id="toggle_light_R" type="checkbox">
+                                <input id="toggle_light_L" type="checkbox">
                                 <span class="slider"></span>
                             </label>
                             <div class="labelwrap">
@@ -117,12 +122,12 @@
                                 <h3 class="labelwrap-hr">on</h3>
                             </div>
                             <br />
-                            <div class="pickerwrap pickerwraphide">
+                            <div class="pickerwrap">
                                 <div class="pickerbkkdswl">
-                                    <div id="pickerR_hue"></div>
+                                    <div id="pickerL_hue"></div>
                                 </div>
                                 <div class="pickerbkkdswr">
-                                    <div id="pickerR_sat"></div>
+                                    <div id="pickerL_sat"></div>
                                 </div>
                             </div>
                         </div>
@@ -198,8 +203,12 @@
         firebase.initializeApp(firebaseConfig);
         firebase.analytics();
     </script>
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script> -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="undefined"
+            crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
     <script src="controller.js"></script>
 </body>

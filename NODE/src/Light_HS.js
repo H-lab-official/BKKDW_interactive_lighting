@@ -25,7 +25,7 @@ class Light_HS {
         console.log("side = " + side);
     osc.send(
       {
-        address: `/composition/layers/2/clips/3/video/source/solidcolor/color/${type}`,
+        address: `/composition/layers/1/clips/2/video/source/solidcolor/color/${type}`,
         args: [
           {
             type: "f",
