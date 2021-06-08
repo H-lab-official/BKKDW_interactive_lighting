@@ -528,6 +528,10 @@ toggle_light_R.onchange = () => {
  };
 
  zerobtn.onclick = () => {
+   document.getElementById("toggle_light_L").checked = false;
+   document.getElementById("toggle_light_R").checked = false;
+   setLight_isON_2Firebase("L", 0);
+   setLight_isON_2Firebase("R", 0);
    setLight_BOTH_2Firebase(1);
  };
 
